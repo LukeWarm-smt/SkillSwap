@@ -94,7 +94,7 @@ public class Offer {
         return false;
     }
 
-        @Override
+    @Override
     public int hashCode(){
         int hash = 13;
         hash *= offerId.hashCode() * 17;

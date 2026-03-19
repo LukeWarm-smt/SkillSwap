@@ -1,14 +1,11 @@
 package SkillSwap.src.domain;
-
-//import lib.org.slf4j.Logger;
 //import lib.org.slf4j.LoggerFactory;
 
 public class Skill{
-    //Skills: skill_id;skillcathegory;name
+    //Skills: skill_id;name;category
     private final String skillId;
+    private final String name;
     private final SkillCategory Scatg;
-    private final Subjects subjectname;
-    private final Other otherName;
 
 
     public Skill(String line){
@@ -41,45 +38,19 @@ public class Skill{
         }
         this.skillId = lines[0].trim();
 
-        //parsing of the type of skill
-        if(lines[1].isEmpty()){
-            throw new IllegalArgumentException("No skill category");
+        //check for empty string
+        if (lines[1].isEmpty()){
+            throw new IllegalArgumentException("No identifier");
+        }
+        this.name = lines[1].trim();
+
+        if(lines[2].isEmpty()){
+            throw new IllegalArgumentException("No type of skill.");
         }
         try {
-            this.Scatg = SkillCategory.valueOf(lines[1].trim().toUpperCase());
+            this.Scatg = SkillCategory.valueOf(lines[2].trim().toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Not recognized skill category");
-        }
-
-        //if subject
-        if(this.Scatg == SkillCategory.SUBJECTS) {
-            if(lines[2].isEmpty()){
-                throw new IllegalArgumentException("No subject");
-            }
-            this.otherName = null;
-            try {
-                this.subjectname = Subjects.valueOf(lines[2].trim().toUpperCase());
-                
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Not recognized subject");
-            }      
-                  
-        }
-        //if other skill
-        else if(this.Scatg == SkillCategory.OTHER) {
-            if(lines[2].isEmpty()){
-                throw new IllegalArgumentException("No other skill");
-            }
-            this.subjectname = null; 
-            try {
-                this.otherName = Other.valueOf(lines[2].trim().toUpperCase());
-                
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Not recognized other skill");
-            }   
-                    
-        }else{
-            throw new IllegalArgumentException("Not recognized skill category");
+            throw new IllegalArgumentException("Unrecognized type of skill");
         }
 
     }
@@ -98,7 +69,7 @@ public class Skill{
     @Override
     public int hashCode(){
         int hash = 13;
-        hash = skillId.hashCode() * 17;
+        hash *= skillId.hashCode() * 17;
         return hash;
     }
 
@@ -111,15 +82,11 @@ public class Skill{
         return skillId;
     }
 
+    public String getName(){
+        return name;
+    }
+
     public SkillCategory getScatg() {
         return Scatg;
-    }
-
-    public Subjects getSubjectname() {
-        return subjectname;
-    }
-
-    public Other getOtherName() {
-        return otherName;
     }
 }
