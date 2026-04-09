@@ -21,6 +21,8 @@ public class StateSkillSwap {
     public Map<String, Offer> getOffers() { return offerState; }
     public Map<String, Request> getRequest() { return requestState; }
 
+    public StateSkillSwap getStateSkillSwap() { return this; }
+    
     //debug stuff
     @Override
     public String toString()

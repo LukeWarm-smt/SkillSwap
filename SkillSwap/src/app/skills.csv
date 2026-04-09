@@ -1,0 +1,50 @@
+K1;Programmazione C;SUBJECT
+K2;Programmazione Java;SUBJECT
+K3;Programmazione Python;SUBJECT
+K4;Sviluppo Web HTML;SUBJECT
+K5;Sviluppo Web CSS;SUBJECT
+K6;Sviluppo Web JavaScript;SUBJECT
+K7;Database SQL;SUBJECT
+K8;Algoritmi e Strutture Dati;SUBJECT
+K9;Sistemi Operativi;SUBJECT
+K10;Reti di Calcolatori;SUBJECT
+K11;Inglese;SUBJECT
+K12;Italiano;SUBJECT
+K13;Matematica;SUBJECT
+K14;Fisica;SUBJECT
+K15;Chimica;SUBJECT
+K16;Biologia;SUBJECT
+K17;Storia;SUBJECT
+K18;Geografia;SUBJECT
+K19;Filosofia;SUBJECT
+K20;Economia;SUBJECT
+K21;Problem Solving;OTHER
+K22;Lavoro di squadra;OTHER
+K23;Comunicazione;OTHER
+K24;Pensiero critico;OTHER
+K25;Gestione del tempo;OTHER
+K26;Leadership;OTHER
+K27;Adattabilità;OTHER
+K28;Creatività;OTHER
+K29;Autonomia;OTHER
+K30;Attenzione ai dettagli;OTHER
+K31;Uso di Microsoft Excel;OTHER
+K32;Uso di Microsoft Word;OTHER
+K33;Uso di PowerPoint;OTHER
+K34;Git e controllo versione;OTHER
+K35;Debugging;OTHER
+K36;Testing software;OTHER
+K37;Analisi dei dati;OTHER
+K38;Cybersecurity di base;OTHER
+K39;Machine Learning base;OTHER
+K40;Intelligenza Artificiale;OTHER
+K41;Disegno tecnico;SUBJECT
+K42;Educazione fisica;SUBJECT
+K43;Musica;SUBJECT
+K44;Arte;SUBJECT
+K45;Elettronica;SUBJECT
+K46;Meccanica;SUBJECT
+K47;Robotica;SUBJECT
+K48;Cloud Computing;OTHER
+K49;Gestione progetti;OTHER
+K50;Public Speaking;OTHER

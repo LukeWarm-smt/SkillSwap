@@ -2,7 +2,6 @@ package SkillSwap.src.service;
 
 import SkillSwap.src.domain.*;
 
-import javax.swing.plaf.nimbus.State;
 
 import SkillSwap.src.app.*;
 import SkillSwap.src.service.*;
