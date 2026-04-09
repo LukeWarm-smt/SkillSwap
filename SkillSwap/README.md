@@ -24,7 +24,6 @@ Inside the `src`, there are four folders:
 ### To compile
     javac SkillSwap/src/domain/*.java
     javac SkillSwap/src/app/*.java
-    javac SkillSwap/src/domain/*.java SkillSwap/src/app/*.java SkillSwap/src/service/*.java SkillSwap/src/state/*.java
 ### To execute
     java SkillSwap/src/app/SkillSwap.java
 

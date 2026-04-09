@@ -1,9 +1,8 @@
 package SkillSwap.src.state;
 
+import SkillSwap.src.domain.*;
 import java.util.HashMap;
 import java.util.Map;
-
-import SkillSwap.src.domain.*;
 
 public class StateSkillSwap {
     private Map<String, Student> studentState = new HashMap<>();
@@ -21,8 +20,6 @@ public class StateSkillSwap {
     public Map<String, Offer> getOffers() { return offerState; }
     public Map<String, Request> getRequest() { return requestState; }
 
-    public StateSkillSwap getStateSkillSwap() { return this; }
-    
     //debug stuff
     @Override
     public String toString()
