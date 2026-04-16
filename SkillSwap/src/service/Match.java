@@ -18,6 +18,6 @@ public class Match {
     @Override
     public String toString()
     {
-        return ("Match:\n 1- " + student_searcher + "\n 2- " + student_matched);
+        return ("Match: " + student_searcher + ", " + student_matched);
     }
 }

@@ -5,77 +5,71 @@ public class Request {
     private final String studentId;
     private final String skillId;
     private final Level min_requested;
-    private final String note;
+    private final Subjects subject;
 
     //request_id;student_id;skill_id;min_level;note
     //R1;S1;K1;BEGINNER;mi blocco sulle stringhe    
 
-    public Request(String line){
-        //check if null and if empty
+    public Request(String line) {
         if (line == null) {
             throw new NullPointerException("String is null");
         }
-        else if(line.isEmpty()){
+
+        line = line.trim();
+        if (line.isEmpty()) {
             throw new IllegalArgumentException("String is empty, no information provided");
         }
-        //split the string into segments
-        //expected separator ";"
-        String lines[] = line.trim().split(";");
-        
-        //Check for line's input of information.
-        if(lines.length != 5){
+
+        String[] parts = line.split(";", -1);
+
+        if (parts.length != 5) {
             throw new IllegalArgumentException("Unrecognized amount of information");
         }
 
-        //check for empty string
-        if (lines[0].isEmpty()){
+        // REQUEST ID
+        String reqId = parts[0].trim();
+        if (reqId.isEmpty()) {
             throw new IllegalArgumentException("No request identifier");
         }
-        if (lines[0].length() < 2) {
-            throw new IllegalArgumentException("request identifier too short");
+        if (reqId.length() < 2 || reqId.charAt(0) != 'R') {
+            throw new IllegalArgumentException("Invalid request identifier");
         }
-        if(lines[0].charAt(0) != 'R'){
-            throw new IllegalArgumentException("Unrecognized request identifier syntaxsis");
-        }
-        this.requestId = lines[0].trim();
+        this.requestId = reqId;
 
-        //check for empty string
-        if (lines[1].isEmpty()){
+        // STUDENT ID
+        String studId = parts[1].trim();
+        if (studId.isEmpty()) {
             throw new IllegalArgumentException("No student identifier");
         }
-        if (lines[1].length() < 2) {
-            throw new IllegalArgumentException("student identifier too short");
+        if (studId.length() < 2 || studId.charAt(0) != 'S') {
+            throw new IllegalArgumentException("Invalid student identifier");
         }
-        if(lines[1].charAt(1) != 'S'){
-            throw new IllegalArgumentException("Unrecognized student identifier syntaxsis");
-        }
-        this.studentId = lines[1].trim();
+        this.studentId = studId;
 
-        //check for empty string
-        if (lines[2].isEmpty()){
+        // SKILL ID
+        String skId = parts[2].trim();
+        if (skId.isEmpty()) {
             throw new IllegalArgumentException("No skill identifier");
         }
-        if (lines[2].length() < 2) {
-            throw new IllegalArgumentException("skill identifier too short");
+        if (skId.length() < 2 || skId.charAt(0) != 'K') {
+            throw new IllegalArgumentException("Invalid skill identifier");
         }
-        if(lines[2].charAt(0) != 'K'){
-            throw new IllegalArgumentException("Unrecognized skill identifier syntaxsis");
-        }
-        this.skillId = lines[2].trim();
+        this.skillId = skId;
 
+        // LEVEL
         try {
-            min_requested = Level.valueOf(lines[3].trim().toUpperCase());
-        } catch (IllegalArgumentException e) {
+            this.min_requested = Level.valueOf(parts[3].trim().toUpperCase());
+        } catch (Exception e) {
             throw new IllegalArgumentException("Unrecognized requested level");
         }
 
-        //check for empty string
-        if (lines[4].isEmpty()){
-            throw new IllegalArgumentException("No note");
+        // NOTE
+        try {
+            this.subject = Subjects.valueOf(parts[4].trim().toUpperCase());
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Unrecognized subject");
         }
-        note = lines[4].trim();
     }
-
     @Override
     public boolean equals(Object obj){
         if(obj instanceof Request){
@@ -106,11 +100,17 @@ public class Request {
         return skillId;
     }
 
-    public Level getMin_requested() {
+    public Level getSkillLevel() {
         return min_requested;
     }
 
-    public String getNote() {
-        return note;
+    public Subjects getSubject() {
+        return subject;
+    }
+
+    @Override
+    public String toString()
+    {
+        return ("Request: " + getRequestId() + ", " + getStudentId() + ", " + getSkillId() + ", " + getSkillLevel() + ", " + getSubject());
     }
 }

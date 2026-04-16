@@ -5,54 +5,52 @@ public class Skill{
     //Skills: skill_id;name;category
     private final String skillId;
     private final String name;
-    private final SkillCategory Scatg;
+    private final /*SkillCategory*/ String Scatg;
 
 
-    public Skill(String line){
-
-        //check if null and if empty
+    public Skill(String line) {
         if (line == null) {
             throw new NullPointerException("String is null");
         }
-        else if(line.isEmpty()){
+
+        line = line.trim();
+        if (line.isEmpty()) {
             throw new IllegalArgumentException("String is empty, no information provided");
         }
-        //split the string into segments
-        //expected separator ";"
-        String lines[] = line.trim().split(";");
-        
-        //Check for line's input of information.
-        if(lines.length != 3){
+
+        String[] parts = line.split(";", -1);
+
+        if (parts.length != 3) {
             throw new IllegalArgumentException("Unrecognized amount of information");
         }
 
-        //check for empty string
-        if (lines[0].isEmpty()){
-            throw new IllegalArgumentException("No identifier");
+        // SKILL ID
+        String id = parts[0].trim();
+        if (id.isEmpty()) {
+            throw new IllegalArgumentException("No skill identifier");
         }
-        if (lines[0].length() < 2) {
-            throw new IllegalArgumentException("Identifier too short");
+        if (id.length() < 2 || id.charAt(0) != 'K') {
+            throw new IllegalArgumentException("Invalid skill identifier");
         }
-        if(lines[0].charAt(0) != 'K'){
-            throw new IllegalArgumentException("Unrecognized identifier syntaxsis");
-        }
-        this.skillId = lines[0].trim();
+        this.skillId = id;
 
-        //check for empty string
-        if (lines[1].isEmpty()){
-            throw new IllegalArgumentException("No identifier");
+        // NAME
+        String n = parts[1].trim();
+        if (n.isEmpty()) {
+            throw new IllegalArgumentException("No skill name");
         }
-        this.name = lines[1].trim();
+        this.name = n;
 
-        if(lines[2].isEmpty()){
-            throw new IllegalArgumentException("No type of skill.");
+        // CATEGORY
+        String cat = parts[2].trim();
+        if (cat.isEmpty()) {
+            throw new IllegalArgumentException("No skill category");
         }
         try {
-            this.Scatg = SkillCategory.valueOf(lines[2].trim().toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Unrecognized type of skill");
+            this.Scatg = parts[2];
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Unrecognized skill category");
         }
-
     }
 
     @Override
@@ -86,7 +84,7 @@ public class Skill{
         return name;
     }
 
-    public SkillCategory getScatg() {
+    public /*SkillCategory*/ String getScatg() {
         return Scatg;
     }
 }
