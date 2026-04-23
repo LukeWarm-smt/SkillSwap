@@ -128,7 +128,7 @@ public class SkillSwap {
         });
 
         MatchingService Mservices = new MatchingService(state);
-        Set<Match> matches_created = new HashSet<>();
+        Map<Exchange, Integer> matches_created = new HashMap<>();;
         while (true)
 
         {
@@ -151,9 +151,10 @@ public class SkillSwap {
 
                             case "1":
                                 try {
-                                    Match matched = Mservices.simpleMatching(state.getRequest().get(input));
-                                    System.out.println("\n" + matched.toString());
-                                    matches_created.add(matched);
+                                    Exchange exchange = Mservices.simpleMatching(state.getRequest().get(input));
+                                    Review review = ReviewService.addReview(exchange);
+                                    System.out.println("\n" + exchange.toString() + "\n" + review.toString());
+                                    matches_created.put(exchange, review.getRating());
                                 } catch (IllegalArgumentException e)
                                 {
                                     System.out.println("Match not found...\n");
@@ -162,9 +163,10 @@ public class SkillSwap {
                                 break;
                             case "2":
                                 try {
-                                    Match Swmatched = Mservices.swapMatching(state.getRequest().get(input));
-                                    System.out.println("\n" + Swmatched.toString());
-                                    matches_created.add(Swmatched);
+                                    Exchange exchange = Mservices.swapMatching(state.getRequest().get(input));
+                                    Review review = ReviewService.addReview(exchange);
+                                    System.out.println("\n" + exchange.toString() + "\n" + review.toString());
+                                    matches_created.put(exchange, review.getRating());
                                 } catch (IllegalArgumentException e)
                                 {
                                     System.out.println("Match not found...\n");

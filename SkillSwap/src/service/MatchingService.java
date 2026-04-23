@@ -19,7 +19,7 @@ public class MatchingService {
         this.state = state;
     }
 
-    public Match simpleMatching(Request request) throws IllegalArgumentException
+    public Exchange simpleMatching(Request request) throws IllegalArgumentException
 
     {
         if (request == null) { throw new IllegalArgumentException();}
@@ -29,11 +29,13 @@ public class MatchingService {
             throw new IllegalArgumentException("No matching found");
         }
         System.out.println("Offer matched: " + offer_matched.toString() + "\nRequest requested: " + request.toString());
-        return new Match(request.getStudentId(), offer_matched.getStudentId());
+        Map<String, Student> studentState = new HashMap<>();
+        studentState = state.getStudents();
+        return new Exchange(studentState.get(request.getStudentId()), studentState.get(offer_matched.getStudentId()));
 
     }
 
-    public Match swapMatching(Request request) throws IllegalArgumentException
+    public Exchange swapMatching(Request request) throws IllegalArgumentException
 
     {
         if (request == null) { throw new IllegalArgumentException();}
@@ -41,7 +43,9 @@ public class MatchingService {
         if (offer_matched == null) {
             throw new IllegalArgumentException("No matching found");
         }
-        return new Match(request.getStudentId(), offer_matched.getStudentId());
+        Map<String, Student> studentState = new HashMap<>();
+        studentState = state.getStudents();
+        return new Exchange(studentState.get(request.getStudentId()), studentState.get(offer_matched.getStudentId()));
 
     }
     public Offer matchWith(Request other) throws IllegalArgumentException {
