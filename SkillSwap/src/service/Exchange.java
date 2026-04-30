@@ -1,5 +1,7 @@
 package SkillSwap.src.service;
 
+import java.util.Objects;
+
 import SkillSwap.src.domain.*;
 public class Exchange {
     private String exchange_id;
@@ -25,8 +27,23 @@ public class Exchange {
     }
     public Transaction_Result getOutcome() { return final_outcome; }
     public String getID() {return exchange_id;}
-
+    public Student getStudentMatched() { return student_matched; }
     public Student getSearcher() {return student_searcher;}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Exchange)) return false;
+        Exchange other = (Exchange) o;
+        return Objects.equals(student_matched, other.getStudentMatched()) &&
+            Objects.equals(student_searcher, other.getSearcher());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(student_matched, student_searcher);
+    }
+    
     @Override
     public String toString()
     {

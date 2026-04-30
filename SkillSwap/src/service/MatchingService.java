@@ -55,7 +55,7 @@ public class MatchingService {
         {
             Offer offer_found = state.getOffers().values().stream()
 
-                    .filter(o -> o.getSkillId().equals(other.getSkillId()) && (!refused.contains(o)))
+                    .filter(o -> o.getSkillId().equals(other.getSkillId()) && (!refused.contains(o) && (!o.getStudentId().equals(other.getStudentId())) && (o.isActive()) ))
 
                     .findFirst()
 
@@ -83,7 +83,7 @@ public class MatchingService {
         {
             Offer offer_found = state.getOffers().values().stream()
 
-                    .filter(o -> o.getSkillId().equals(other.getSkillId()) && (!refused.contains(o)) && o.getSubject().equals(other.getSubject()))
+                    .filter(o -> o.getSkillId().equals(other.getSkillId()) && (!refused.contains(o)) && o.getSubject().equals(other.getSubject()) && (!o.getStudentId().equals(other.getStudentId()) && (o.isActive())))
 
                     .findFirst()
 

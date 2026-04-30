@@ -30,7 +30,6 @@ public class SkillSwap {
     public static void main(String[] args) {
 
         StateSkillSwap state = new StateSkillSwap();
-
         Scanner scanf = new Scanner(System.in);
 
         int i = 0;
@@ -126,14 +125,13 @@ public class SkillSwap {
                 System.out.println("Errore in request " + requesty);
             }
         });
-
+        ConsoleReportPrinter crp = new ConsoleReportPrinter(state);
         MatchingService Mservices = new MatchingService(state);
-        Map<Exchange, Integer> matches_created = new HashMap<>();;
         while (true)
 
         {
 
-            if (!matches_created.isEmpty()) { System.out.println("Skill Swap \n\n 1 - show state\n 2 - match\n 3 - Check created matches\n 4 - Leave"); } else { System.out.println("Skill Swap \n\n 1 - show state\n 2 - match\n 3 - Leave");}
+            if (!crp.getMatchesCreatedMap().isEmpty()) { System.out.println("Skill Swap \n\n 1 - show state\n 2 - match\n 3 - Check created matches\n 4 - Leave"); } else { System.out.println("Skill Swap \n\n 1 - show state\n 2 - match\n 3 - Leave");}
 
             switch (scanf.nextLine()) {
 
@@ -146,7 +144,7 @@ public class SkillSwap {
                     {
                         System.out.println("Insert request id\n");
                         String input = scanf.nextLine();   
-                        System.out.println("1- Simple\n2- Swap (same level)\n");   
+                        System.out.println("1- Simple\n2- Swap (same subject)\n");   
                         switch (scanf.nextLine()) {
 
                             case "1":
@@ -154,7 +152,7 @@ public class SkillSwap {
                                     Exchange exchange = Mservices.simpleMatching(state.getRequest().get(input));
                                     Review review = ReviewService.addReview(exchange);
                                     System.out.println("\n" + exchange.toString() + "\n" + review.toString());
-                                    matches_created.put(exchange, review.getRating());
+                                    crp.addMatch(exchange, review.getRating());
                                 } catch (IllegalArgumentException e)
                                 {
                                     System.out.println("Match not found...\n");
@@ -166,7 +164,7 @@ public class SkillSwap {
                                     Exchange exchange = Mservices.swapMatching(state.getRequest().get(input));
                                     Review review = ReviewService.addReview(exchange);
                                     System.out.println("\n" + exchange.toString() + "\n" + review.toString());
-                                    matches_created.put(exchange, review.getRating());
+                                    crp.addMatch(exchange, review.getRating());
                                 } catch (IllegalArgumentException e)
                                 {
                                     System.out.println("Match not found...\n");
@@ -179,16 +177,16 @@ public class SkillSwap {
                     }
                     break;
                 case "3":
-                    if (matches_created.isEmpty()) { return;}
+                    if (crp.getMatchesCreatedMap().isEmpty()) { return;}
                     else
                     {
-                        System.out.println(matches_created.toString());
+                        System.out.println(crp.getMatchesCreatedMap().toString());
                         break;
                     }
                 case "4":
-                    if (matches_created.isEmpty())
+                    if (crp.getMatchesCreatedMap().isEmpty())
                     {
-                        System.out.println(matches_created.toString());
+                        System.out.println(crp.getMatchesCreatedMap().toString());
                         break;
                     }
                     else return;
