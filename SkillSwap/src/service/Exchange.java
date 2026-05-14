@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import SkillSwap.src.domain.*;
 public class Exchange {
-    private String exchange_id;
+    private int exchange_id;
     private Student student_searcher;
     private Student student_matched;
     private Transaction_Result final_outcome;
@@ -26,10 +26,10 @@ public class Exchange {
         }
     }
     public Transaction_Result getOutcome() { return final_outcome; }
-    public String getID() {return exchange_id;}
+    public int getID() {return exchange_id;}
     public Student getStudentMatched() { return student_matched; }
     public Student getSearcher() {return student_searcher;}
-
+    public void giveID(int c) {exchange_id = c;}
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,6 +47,6 @@ public class Exchange {
     @Override
     public String toString()
     {
-        return ("Exchange: " + student_searcher.getId() + " [" + student_searcher.getName() + "], " + student_matched.getId() + " [" + student_matched.getName() + "] | " + final_outcome + " | ");
+        return ("Exchange [" + getID() + "]: " + student_searcher.getId() + " [" + student_searcher.getName() + "], " + student_matched.getId() + " [" + student_matched.getName() + "] | " + final_outcome + " | ");
     }
 }

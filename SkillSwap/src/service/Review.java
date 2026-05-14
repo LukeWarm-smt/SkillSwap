@@ -1,7 +1,7 @@
 package SkillSwap.src.service;
 
 public class Review {
-    private final String exchange_id;
+    private final int exchange_id;
     private final String reviewer_id;
     private final int rating;
     private final String note;
